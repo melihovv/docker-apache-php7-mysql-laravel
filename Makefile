@@ -2,7 +2,7 @@ VOLUME_MAP=//path/to/your/laravel_app:/var/www/html
 DB_ROOT_PASS=db_root_pass
 DB_NAME=db_name
 DB_USER=db_user
-DB_USER_PASS=user_pass
+DB_USER_PASS=db_user_pass
 
 build:
 	docker build -t mysql_datastore mysql_datastore/
