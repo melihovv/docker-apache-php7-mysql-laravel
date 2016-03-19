@@ -19,7 +19,8 @@ run:
 		-e MYSQL_DATABASE=$(DB_NAME) \
 		-e MYSQL_USER=$(DB_USER) \
 		-e MYSQL_PASSWORD=$(DB_USER_PASS) \
-		-d mysql:5.7
+		-d mysql:5.7 \
+			--max-allowed-packet=33554432
 	docker run -p 80:80 --name apache_php --link mysql:mysql \
 		--volumes-from app_datastore -d apache_php
 
