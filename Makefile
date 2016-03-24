@@ -6,7 +6,7 @@ DB_USER=db_user
 DB_USER_PASS=db_user_pass
 
 
-all: copy build run sleep migrate
+all: copy build run sleep migrate seed
 
 
 build: build-mysql-ds build-app-ds build-apache-php build-artisan
@@ -51,6 +51,9 @@ sleep:
 
 migrate:
 	./artisan.sh migrate
+
+seed:
+	./artisan.sh db:seed
 
 copy:
 	cp php.ini apache_php/
