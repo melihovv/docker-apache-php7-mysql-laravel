@@ -39,7 +39,9 @@ run-mysql:
 		-e MYSQL_USER=$(DB_USER) \
 		-e MYSQL_PASSWORD=$(DB_USER_PASS) \
 		-d mysql:5.7 \
-		--max-allowed-packet=33554432
+		--max-allowed-packet=33554432 \
+		--character-set-server=utf8 \
+		--collation-server=utf8_general_ci
 
 run-apache-php:
 	docker run -p 80:80 --name apache_php --link mysql:mysql \
