@@ -1,4 +1,4 @@
 #!/bin/sh
 
-docker run --volumes-from app_datastore --link mysql:mysql --rm artisan "$@"
+docker run --volumes-from app_ds --link mysql:mysql --rm artisan "$@"
 

@@ -1,13 +1,11 @@
-FROM composer:composer
+FROM composer/composer:latest
 
 MAINTAINER Alexander Melihov <amelihovv@ya.ru>
 
 RUN \
-    mkdir -p /var/www/html
+    docker-php-ext-install pdo pdo_mysql
 
-VOLUME /var/www/html
-WORKDIR /var/www/html
-
-ENTRYPOINT ["composer"]
-CMD ["--help"]
+# Set up the command arguments
+CMD ["-"]
+ENTRYPOINT ["composer", "--ansi"]
 

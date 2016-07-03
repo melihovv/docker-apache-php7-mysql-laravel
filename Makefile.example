@@ -13,46 +13,46 @@ all: \
 	build \
 	run \
 	sleep \
-	composer-install \
+	install-composer \
+	custom \
 	migrate \
 	seed \
-	optimize \
-	custom
+	optimize
 
 
 build: \
 	build-mysql-ds \
 	build-app-ds \
 	build-apache-php \
-	build-artisan \
-	build-composer
+	build-composer \
+	build-artisan
 
 build-mysql-ds:
-	docker build -t mysql_datastore mysql_datastore/
+	docker build -t mysql_ds mysql_ds/
 
 build-app-ds:
-	docker build -t app_datastore app_datastore/
+	docker build -t app_ds app_ds/
 
 build-apache-php:
 	docker build -t apache_php apache_php/
 
-build-artisan:
-	docker build -t artisan artisan/
-
 build-composer:
 	docker build -t composer composer/
+
+build-artisan:
+	docker build -t artisan artisan/
 
 
 run: run-mysql-ds run-app-ds run-mysql run-apache-php
 
 run-mysql-ds:
-	docker run --name mysql_datastore mysql_datastore true
+	docker run --name mysql_ds mysql_ds true
 
 run-app-ds:
-	docker run --name app_datastore -v $(VOLUME_MAP) app_datastore true
+	docker run --name app_ds -v $(VOLUME_MAP) app_ds true
 
 run-mysql:
-	docker run -p 3306:3306 --name mysql --volumes-from mysql_datastore \
+	docker run -p 3306:3306 --name mysql --volumes-from mysql_ds \
 		-e MYSQL_ROOT_PASSWORD=$(DB_ROOT_PASS) \
 		-e MYSQL_DATABASE=$(DB_NAME) \
 		-e MYSQL_USER=$(DB_USER) \
@@ -64,7 +64,7 @@ run-mysql:
 
 run-apache-php:
 	docker run -p 80:80 --name apache_php --link mysql:mysql \
-		--volumes-from app_datastore -d apache_php
+		--volumes-from app_ds -d apache_php
 
 
 sleep:
@@ -82,15 +82,11 @@ copy:
 
 set-permissions:
 	chmod +x ./artisan.sh
-	chmod +x ./composer.sh
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/storage
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/bootstrap/cache
 
 optimize:
 	./artisan.sh optimize
-
-composer-install:
-	./composer.sh install --ignore-platform-reqs
 
 custom:
 	echo 'custom comands here'
@@ -100,4 +96,8 @@ pull:
 	docker pull php:7.0-cli
 	docker pull php:7.0-apache
 	docker pull mysql:latest
+
+install-composer:
+	sudo cp ./composer.sh /usr/local/bin/composer -f
+	sudo chmod +x /usr/local/bin/composer
 
