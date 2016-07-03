@@ -1,4 +1,5 @@
-VOLUME_MAP=//path/to/your/laravel_app:/var/www/html
+PATH_TO_YOUR_LARAVEL_APP=/path/to/your/laravel/app
+VOLUME_MAP=/path/to/your/laravel_app:/var/www/html
 
 DB_ROOT_PASS=db_root_pass
 DB_NAME=db_name
@@ -6,7 +7,7 @@ DB_USER=db_user
 DB_USER_PASS=db_user_pass
 
 
-all: copy build run sleep migrate seed
+all: copy set-permissions build run sleep migrate seed
 
 
 build: build-mysql-ds build-app-ds build-apache-php build-artisan
@@ -60,4 +61,8 @@ seed:
 copy:
 	cp php.ini apache_php/
 	cp php.ini artisan/
+
+set-permissions:
+	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/storage
+	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/bootstrap/cache
 
