@@ -11,13 +11,9 @@ all: \
 	set-permissions \
 	build \
 	run \
-	sleep \
 	install-composer \
 	install-php \
-	custom \
-	migrate \
-	seed \
-	optimize
+	custom
 
 
 build: \
@@ -68,15 +64,6 @@ run-apache-php:
 		--volumes-from app_ds -d apache_php
 
 
-sleep:
-	sleep 10
-
-migrate:
-	php artisan migrate
-
-seed:
-	php artisan db:seed
-
 copy:
 	cp php.ini apache_php/
 	cp php.ini php/
@@ -84,9 +71,6 @@ copy:
 set-permissions:
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/storage
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/bootstrap/cache
-
-optimize:
-	php artisan optimize
 
 custom:
 	echo 'custom comands here'
