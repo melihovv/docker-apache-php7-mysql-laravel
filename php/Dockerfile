@@ -11,6 +11,6 @@ RUN \
 VOLUME /var/www/html
 WORKDIR /var/www/html
 
-ENTRYPOINT ["php", "artisan"]
+ENTRYPOINT ["php"]
 CMD ["--help"]
 

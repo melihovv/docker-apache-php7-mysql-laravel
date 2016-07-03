@@ -13,7 +13,7 @@ all: \
 	run \
 	sleep \
 	install-composer \
-	install-artisan \
+	install-php \
 	custom \
 	migrate \
 	seed \
@@ -26,7 +26,7 @@ build: \
 	build-app-ds \
 	build-apache-php \
 	build-composer \
-	build-artisan
+	build-php
 
 build-mysql-ds:
 	docker build -t mysql_ds mysql_ds/
@@ -40,8 +40,8 @@ build-apache-php:
 build-composer:
 	docker build -t composer composer/
 
-build-artisan:
-	docker build -t artisan artisan/
+build-php:
+	docker build -t php php/
 
 
 run: run-mysql-ds run-app-ds run-mysql run-apache-php
@@ -72,21 +72,21 @@ sleep:
 	sleep 10
 
 migrate:
-	artisan migrate
+	php artisan migrate
 
 seed:
-	artisan db:seed
+	php artisan db:seed
 
 copy:
 	cp php.ini apache_php/
-	cp php.ini artisan/
+	cp php.ini php/
 
 set-permissions:
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/storage
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/bootstrap/cache
 
 optimize:
-	artisan optimize
+	php artisan optimize
 
 custom:
 	echo 'custom comands here'
@@ -95,7 +95,7 @@ install-composer:
 	sudo cp ./composer.sh /usr/local/bin/composer -f
 	sudo chmod +x /usr/local/bin/composer
 
-install-artisan:
-	sudo cp ./artisan.sh /usr/local/bin/artisan -f
-	sudo chmod +x /usr/local/bin/artisan
+install-php:
+	sudo cp ./php.sh /usr/local/bin/php -f
+	sudo chmod +x /usr/local/bin/php
 
