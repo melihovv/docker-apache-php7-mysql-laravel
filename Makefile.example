@@ -7,10 +7,10 @@ DB_USER=db_user
 DB_USER_PASS=db_user_pass
 
 
-all: copy set-permissions build run sleep migrate seed optimize
+all: copy set-permissions build run sleep composer-install migrate seed optimize
 
 
-build: build-mysql-ds build-app-ds build-apache-php build-artisan
+build: build-mysql-ds build-app-ds build-apache-php build-artisan build-composer
 
 build-mysql-ds:
 	docker build -t mysql_datastore mysql_datastore/
@@ -23,6 +23,9 @@ build-apache-php:
 
 build-artisan:
 	docker build -t artisan artisan/
+
+build-composer:
+	docker build -t composer composer/
 
 
 run: run-mysql-ds run-app-ds run-mysql run-apache-php
@@ -63,9 +66,14 @@ copy:
 	cp php.ini artisan/
 
 set-permissions:
+	chmod +x ./artisan.sh
+	chmod +x ./composer.sh
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/storage
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/bootstrap/cache
 
 optimize:
 	./artisan.sh optimize
+
+composer-install:
+	./composer.sh install --ignore-platform-reqs
 
