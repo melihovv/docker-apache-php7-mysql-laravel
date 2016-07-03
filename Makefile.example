@@ -1,5 +1,5 @@
 PATH_TO_YOUR_LARAVEL_APP=/path/to/your/laravel/app
-VOLUME_MAP=/path/to/your/laravel_app:/var/www/html
+VOLUME_MAP=$(PATH_TO_YOUR_LARAVEL_APP):/var/www/html
 
 DB_ROOT_PASS=db_root_pass
 DB_NAME=db_name
