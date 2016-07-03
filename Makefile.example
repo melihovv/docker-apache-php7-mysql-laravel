@@ -14,6 +14,7 @@ all: \
 	run \
 	sleep \
 	install-composer \
+	install-artisan \
 	custom \
 	migrate \
 	seed \
@@ -71,33 +72,30 @@ sleep:
 	sleep 10
 
 migrate:
-	./artisan.sh migrate
+	artisan migrate
 
 seed:
-	./artisan.sh db:seed
+	artisan db:seed
 
 copy:
 	cp php.ini apache_php/
 	cp php.ini artisan/
 
 set-permissions:
-	chmod +x ./artisan.sh
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/storage
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/bootstrap/cache
 
 optimize:
-	./artisan.sh optimize
+	artisan optimize
 
 custom:
 	echo 'custom comands here'
 
-pull:
-	docker pull composer/composer
-	docker pull php:7.0-cli
-	docker pull php:7.0-apache
-	docker pull mysql:latest
-
 install-composer:
 	sudo cp ./composer.sh /usr/local/bin/composer -f
 	sudo chmod +x /usr/local/bin/composer
+
+install-artisan:
+	sudo cp ./artisan.sh /usr/local/bin/artisan -f
+	sudo chmod +x /usr/local/bin/artisan
 

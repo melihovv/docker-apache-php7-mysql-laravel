@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-docker run --volumes-from app_ds --link mysql:mysql --rm artisan "$@"
+export PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin
+
+echo "Current working directory: '"$(pwd)"'"
+
+docker run --rm -v $(pwd):/var/www/html --link mysql:mysql artisan "$@"
 
