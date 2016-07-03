@@ -7,7 +7,7 @@ DB_USER=db_user
 DB_USER_PASS=db_user_pass
 
 
-all: copy set-permissions build run sleep migrate seed
+all: copy set-permissions build run sleep migrate seed optimize
 
 
 build: build-mysql-ds build-app-ds build-apache-php build-artisan
@@ -65,4 +65,7 @@ copy:
 set-permissions:
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/storage
 	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/bootstrap/cache
+
+optimize:
+	./artisan.sh optimize
 
