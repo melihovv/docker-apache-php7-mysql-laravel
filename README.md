@@ -2,10 +2,10 @@
 Docker images for launching laravel app
 
 Your .env file should contains following variables:
-DB_HOST="${MYSQL_PORT_3306_TCP_ADDR}"
-DB_DATABASE="${MYSQL_ENV_MYSQL_DATABASE}"
-DB_USERNAME="${MYSQL_ENV_MYSQL_USER}"
-DB_PASSWORD="${MYSQL_ENV_MYSQL_PASSWORD}"
+- DB_HOST="${MYSQL_PORT_3306_TCP_ADDR}"
+- DB_DATABASE="${MYSQL_ENV_MYSQL_DATABASE}"
+- DB_USERNAME="${MYSQL_ENV_MYSQL_USER}"
+- DB_PASSWORD="${MYSQL_ENV_MYSQL_PASSWORD}"
 
 1. copy Makefile.example to Makefile
 2. change mysql variables in Makefile
