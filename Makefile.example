@@ -7,11 +7,25 @@ DB_USER=db_user
 DB_USER_PASS=db_user_pass
 
 
-all: copy set-permissions build run sleep composer-install migrate \
-	seed optimize custom
+all: \
+	copy \
+	set-permissions \
+	build \
+	run \
+	sleep \
+	composer-install \
+	migrate \
+	seed \
+	optimize \
+	custom
 
 
-build: build-mysql-ds build-app-ds build-apache-php build-artisan build-composer
+build: \
+	build-mysql-ds \
+	build-app-ds \
+	build-apache-php \
+	build-artisan \
+	build-composer
 
 build-mysql-ds:
 	docker build -t mysql_datastore mysql_datastore/
