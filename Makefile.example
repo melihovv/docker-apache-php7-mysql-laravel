@@ -95,3 +95,9 @@ composer-install:
 custom:
 	echo 'custom comands here'
 
+pull:
+	docker pull composer/composer
+	docker pull php:7.0-cli
+	docker pull php:7.0-apache
+	docker pull mysql:latest
+
