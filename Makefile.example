@@ -69,8 +69,8 @@ copy:
 	cp php.ini php/
 
 set-permissions:
-	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/storage
-	chmod o+w $(PATH_TO_YOUR_LARAVEL_APP)/bootstrap/cache
+	sudo chmod -R o+w $(PATH_TO_YOUR_LARAVEL_APP)/storage
+	sudo chmod -R o+w $(PATH_TO_YOUR_LARAVEL_APP)/bootstrap/cache
 
 custom:
 	echo 'custom comands here'
