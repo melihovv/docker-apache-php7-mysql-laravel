@@ -1,6 +1,10 @@
 # docker-apache-php7-mysql-laravel
 Docker images for launching laravel app
 
+Requirements:
+- docker pull mysql
+- docker pull redis:3.0
+
 Your .env file should contains following variables:
 - DB_HOST="${MYSQL_PORT_3306_TCP_ADDR}"
 - DB_DATABASE="${MYSQL_ENV_MYSQL_DATABASE}"

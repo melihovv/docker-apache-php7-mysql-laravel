@@ -40,7 +40,7 @@ build-php:
 	docker build -t php php/
 
 
-run: run-mysql-ds run-app-ds run-mysql run-apache-php
+run: run-mysql-ds run-app-ds run-mysql run-apache-php run-redis
 
 run-mysql-ds:
 	docker run --name mysql_ds mysql_ds true
@@ -61,7 +61,10 @@ run-mysql:
 
 run-apache-php:
 	docker run -p 80:80 --name apache_php --link mysql:mysql \
-		--volumes-from app_ds -d apache_php
+		--link laravel_redis:redis --volumes-from app_ds -d apache_php
+
+run-redis:
+	docker run --name laravel_redis -d redis:3.0
 
 
 copy:
